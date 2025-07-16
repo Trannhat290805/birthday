@@ -50,12 +50,8 @@
     }
 
     @keyframes sparkle {
-      0% {
-        text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff1493, 0 0 30px #ff69b4;
-      }
-      100% {
-        text-shadow: 0 0 20px #ff69b4, 0 0 40px #ff1493, 0 0 60px #ff69b4;
-      }
+      0% { text-shadow: 0 0 10px #ff69b4, 0 0 20px #ff1493, 0 0 30px #ff69b4; }
+      100% { text-shadow: 0 0 20px #ff69b4, 0 0 40px #ff1493, 0 0 60px #ff69b4; }
     }
 
     .slide-container {
@@ -166,7 +162,6 @@
       font-size: 0.9em;
     }
 
-    /* Music button */
     #playMusic {
       position: absolute;
       top: 20px;
@@ -208,7 +203,7 @@
 
   <!-- Scene 2: Book -->
   <div id="book-container">
-    <div class="greeting">🎉 Chúc pet một ngày tràn ngập niềm vui 🎉</div>
+    <div class="greeting">🎉 Chúc mừng sinh nhật 🎉</div>
     <div id="book">
       <div class="page"><img src="anh1.png" alt="Page 1"></div>
       <div class="page"><img src="anh2.jpg" alt="Page 2"></div>
@@ -220,7 +215,19 @@
   </div>
 
   <script>
-    // Matrix effect
+    const bgMusic = document.getElementById('bgMusic');
+    const musicBtn = document.getElementById('playMusic');
+    bgMusic.volume = 0.5;
+
+    bgMusic.play().catch(() => {
+      musicBtn.style.display = 'block';
+    });
+
+    musicBtn.addEventListener('click', () => {
+      bgMusic.play();
+      musicBtn.style.display = 'none';
+    });
+
     const matrix = document.getElementById('matrix');
     const chars = 'HAPPYBIRTHDAYTOYOU';
     const columns = Math.floor(window.innerWidth / 12);
@@ -237,28 +244,11 @@
     }
     setInterval(drawMatrix, 200);
 
-    // Background music autoplay
-    const bgMusic = document.getElementById('bgMusic');
-    const musicBtn = document.getElementById('playMusic');
-    bgMusic.volume = 0.5;
-
-    // Try autoplay
-    bgMusic.play().catch(() => {
-      // If autoplay fails, show button
-      musicBtn.style.display = 'block';
-    });
-
-    musicBtn.addEventListener('click', () => {
-      bgMusic.play();
-      musicBtn.style.display = 'none';
-    });
-
-    // Slide data
     const slides = [
-      { image: "anh9.png", text: "tao chúc mày tuổi mới nhan sắc quyết liệt, tiền tài ào ào, tình yêu tưng bừng… đừng sống ở động “ế” lâu quá, người ta quên" },
-      { image: "anh8.png", text: "Chúc pet sinh nhật vất vả và hạnh phúc bỏ đi nhé…" },
-      { image: "anh10.png", text: "tuổi mới có tất cả trừ vất cả. Xin chúc mừng sinh nhật công dân xinh đẹp, kiêu sa, mỹ miều, yêu kiều nhất quả đất, chúc sớm phát tài nha gái." },
-      { image: "anh7.png", text: "sinh nhật vui vẻ , hạnh phúc mọi cố gắng sẽ được đền đáp\n\nT đại diện cho 7 tỷ người chúc m sanh thần vui vẻ" }
+      { image: "anh9.png", text: "Chúc mừng sinh nhật 🎉" },
+      { image: "anh8.png", text: "Tuổi mới nhiều niềm vui ❤️" },
+      { image: "anh10.png", text: "Hạnh phúc và thành công 🌟" },
+      { image: "anh7.png", text: "Bạn tuyệt vời nhất 🥳" }
     ];
 
     const slideContainer = document.getElementById('slideContainer');
@@ -276,7 +266,7 @@
           showSlide(index + 1);
         }, 5000);
       } else {
-        document.getElementById('slideContainer').style.display = 'none';
+        slideContainer.style.display = 'none';
         document.getElementById('book-container').style.display = 'flex';
       }
     }
@@ -288,7 +278,7 @@
     }, 9000);
 
     const pages = document.querySelectorAll(".page");
-    pages.forEach((page) => {
+    pages.forEach(page => {
       page.addEventListener("click", () => {
         page.classList.toggle("flipped");
       });
